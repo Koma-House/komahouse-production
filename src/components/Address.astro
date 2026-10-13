@@ -4,6 +4,6 @@ import MainButton from "./mainButton.astro";
 ---
 
 <>
-{address}<br />
+<span set:html={address}></span>
 <MainButton text="Google Map" href="https://maps.app.goo.gl/YcdU2o9YqX7ANucn9" isBlank />
 </>

@@ -190,8 +190,8 @@ const sliderData_row = [
         </div>
         <div class="gallerySlider_window">
             {sliderData.map((item, index) => {
-                const loading = index < 2 ? "eager" : "lazy"
-                const fetchpriority = index < 2 ? "high" : "low"
+                const loading = index < 2 ? "lazy" : "lazy"
+                const fetchpriority = index < 2 ? "low" : "low"
                 return (
                     <div class={index === 0 ? "gallerySlider_window_item" : "gallerySlider_window_item js--hidden"}>
                         <picture >
