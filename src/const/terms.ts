@@ -175,7 +175,7 @@ export const legalContent = `
                 運営に関する特記事項
             </th>
             <td>
-                旅館業経営許可番号　〇〇　
+                旅館業経営許可番号　第R8-16号
             </td>
         </tr>
     </table>
