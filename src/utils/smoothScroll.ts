@@ -56,8 +56,6 @@ function scrollToCurrentHash() {
   const hash = window.location.hash;
   if (!hash) return;
 
-  console.log(hash);
-
   const target = document.getElementById(hash.replace("#", ""));
   if (!target) return;
 

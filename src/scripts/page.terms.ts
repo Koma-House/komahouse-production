@@ -9,7 +9,6 @@ export function pageTerms_init() {
   const setActiveNav = (id: string) => {
     navItems.forEach((item) => {
       const href = item.getAttribute("href");
-      console.log(id === href);
       item.classList.toggle("--current", href === id);
     });
   };
