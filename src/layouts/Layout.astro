@@ -14,14 +14,14 @@ interface Props {
 
 const { title, description: pageDescription, ogType = 'website', } = Astro.props;
 
-const baseDescription = "";
+const baseDescription = "人・自然・創造が呼び合い、新しい物語が生まれる。古民家の時間と記憶を受け継ぐ一棟貸切宿の新ブランド「KOMA HOUSE（呼間）」。千葉県木更津市に2026年7月オープン予定。";
 const description = pageDescription ? pageDescription : baseDescription;
 
-const baseTitle = 'KOMA HOUSE';
+const baseTitle = 'KOMA HOUSE｜一棟貸切宿の新ブランド｜千葉県木更津市';
 const pageTitle = title ? `${title} - ${baseTitle}` : baseTitle;
 
-// const pageUrl = Astro.url.href;
-// const ogpUrl = new URL('/ogp.png', Astro.url.origin).href;
+const url = 'https://koma-house.com';
+const ogp = "https://koma-house.com/OGP.png";
 ---
 
 <!doctype html>
@@ -35,11 +35,11 @@ const pageTitle = title ? `${title} - ${baseTitle}` : baseTitle;
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:type" content={ogType} />
-    <!-- <meta property="og:url" content={pageUrl} /> -->
+    <meta property="og:url" content={url} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content={baseTitle} />
 	<meta property="og:locale" content={"ja_JP"} />
-    <!-- <meta property="og:image" content={ogpUrl} /> -->
+    <meta property="og:image" content={ogp} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={pageTitle} />
@@ -47,7 +47,7 @@ const pageTitle = title ? `${title} - ${baseTitle}` : baseTitle;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <!-- <meta name="twitter:image" content={ogpUrl} /> -->
+    <meta name="twitter:image" content={ogp} />
     <link rel="icon" href="/Favicon.png" />
 
     <meta name="generator" content={Astro.generator} />
