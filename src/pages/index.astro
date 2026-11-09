@@ -14,10 +14,17 @@ import Gallery from '../components/Gallery.astro';
 import Faq from '../components/Faq.astro';
 import src_1f from "../assets/top/map.png"
 import { microcms } from "../libs/microCMS"
-import type { FacilityType } from '../libs/microCMS';
+import type { FacilityType, FaqType } from '../libs/microCMS';
 
 const facilities = await microcms.getAllContents<FacilityType>({
     endpoint: "facility",
+    queries: {
+      orders: "-system:default",
+    },
+});
+
+const faqs = await microcms.getAllContents<FaqType>({
+    endpoint: "faq",
     queries: {
       orders: "-system:default",
     },
@@ -201,6 +208,6 @@ const facilities = await microcms.getAllContents<FacilityType>({
 				</div>
 			</div>
 		</section>
-		<Faq />
+		<Faq data={faqs} />
 	</article>
 </Layout>

@@ -1,65 +1,33 @@
 ---
 import { toFaq, toPet } from "../const/menu";
+import type { FaqType } from "../libs/microCMS";
 import { zeroPad } from "../utils/calc";
 import SectionHeading from "./SectionHeading.astro";
 
-const faq = [
-	{
-		q: "駐車場は何台止められますか？",
-		a: `
-            敷地内に約5台分の駐車スペースをご用意しております。
-		`,
-	},
-	{
-		q: "調味料はありますか？",
-		a: `
-            調味料はご用意ございません。<br />
-            お好みのものをご持参ください。
-		`,
-	},
-	{
-		q: "サウナ用品はありますか？",
-		a: `
-            サウナマット6枚とサウナポンチョをご準備いたしております。<br />
-            その他のサウナ用品はご持参ください。
-		`,
-	},
-	{
-		q: "テレビはありますか？",
-		a: `
-            各種サブスクリプション対応のプロジェクターがあります。
-		`,
-	},
-	{
-		q: "BBQは雨でもできますか？",
-		a: `
-            BBQは屋外ですので、雨天でのご利用はご遠慮ください。
-		`,
-	},
-	{
-		q: "ペットと一緒に泊まれますか?",
-		a: `
-            はい、可能です。<a href="${toPet.href}">利用条件</a>がございますので、事前にご確認ください。
-		`,
-	},
-]
+interface Props {
+	data: FaqType[]
+}
+
+const { data } = Astro.props
+
+console.log(data)
 ---
 
 <section class="faq" id="faq">
     <SectionHeading main={toFaq.title} />
     <ul class="faqList">
-        {faq.map((item, index) => (
+        { data.map((item, index) => (
             <li class="faqList_card --accordion">
                 <button class="faqList_card_q --accordion_button">
                     <p class="faqList_card_q_number">Q.{zeroPad(index + 1, 2)}</p>
-                    <p class="faqList_card_q_title">{item.q}</p>
+                    <p class="faqList_card_q_title">{item.question}</p>
                     <svg class="faqList_card_q_icon --accordion_head_icon" width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="7" y="13" width="13" height="1"/>
                         <rect x="14" y="7" width="13" height="1" transform="rotate(90 14 7)"/>
                     </svg>
                 </button>
                 <div class="faqList_card_a --accordion_body">
-                    <p class="faqList_card_a_inner --accordion_bodyInner" set:html={item.a}></p>
+                    <div class="faqList_card_a_inner --accordion_bodyInner" set:html={item.answer}></div>
                 </div>
             </li>
         ))}
