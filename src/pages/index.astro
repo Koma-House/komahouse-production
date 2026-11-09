@@ -13,6 +13,15 @@ import Others from '../components/Others.astro';
 import Gallery from '../components/Gallery.astro';
 import Faq from '../components/Faq.astro';
 import src_1f from "../assets/top/map.png"
+import { microcms } from "../libs/microCMS"
+import type { FacilityType } from '../libs/microCMS';
+
+const facilities = await microcms.getAllContents<FacilityType>({
+    endpoint: "facility",
+    queries: {
+      orders: "-system:default",
+    },
+});
 ---
 
 <Layout>
@@ -52,7 +61,7 @@ import src_1f from "../assets/top/map.png"
 				</p>
 			</div>
 		</section>
-		<Facility />
+		<Facility data={facilities} />
 		<Others />
 		<section class="floor">
 			<div class="floor_texts">
