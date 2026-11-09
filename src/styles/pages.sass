@@ -711,10 +711,15 @@
                 margin-bottom: calc(1.7em * 3)
                 a
                     text-decoration: underline
+                .access_block_note
+                    +f.font(calc(13 * 0.8), 170, 6, R)
+                    margin-bottom: 1.7em
+                    display: inline-block
                 .access_block_content
                     padding-left: 1.5em
                     border-left: v.$border
                     margin-top: 0.5em
+                    white-space: pre-line
                 .access_block_grid
                     +f.grid(repeat(2, 1fr), auto, 6rem, calc(1.7 * 1em))
                 .--indent

@@ -21,10 +21,11 @@ export type FaqType = {
 
 type CustomFacilities = {
   title: string;
-  body: string[];
+  body: { title: string }[];
 };
 
 export type InformationType = {
+  access: { title: string; detail: string }[];
   checkIn: string;
   checkOut: string;
   capacity: string;
