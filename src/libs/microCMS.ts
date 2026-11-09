@@ -21,6 +21,7 @@ export type FaqType = {
 
 type CustomFacilities = {
   title: string;
+  isLong: boolean;
   body: { title: string }[];
 };
 

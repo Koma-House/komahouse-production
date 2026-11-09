@@ -33,8 +33,6 @@ const faqs = await microcms.getAllContents<FaqType>({
 const info = await microcms.getObject<InformationType>({
   endpoint: "information",
 });
-
-console.log(info.access[0])
 ---
 
 <Layout>
@@ -148,11 +146,11 @@ console.log(info.access[0])
 					</div>
 					<div class="access_block">
 						<SectionHeading main={"Facilities"} />
-						<p class="access_block_note">＊季節や仕入れ状況により変わることがあります。<br class="--sp" />予めご了承ください。</p>
+						<p class="access_block_note">＊季節や仕入れ状況により変わることがあります。予めご了承ください。</p>
 						<div class="access_block_content --faci">
 							<ul class="access_block_grid">
 								{info.facilities.map((child) => (
-									<li class="--indent">
+									<li class={child.isLong ? "--indent --long" : "--indent"}>
 										{child.title}<br />
 										{child.body.map((grandChild, index) => (
 											<>{grandChild.title}{index !== child.body.length - 1 && <br />}</>

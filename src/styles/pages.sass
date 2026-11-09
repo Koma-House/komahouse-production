@@ -721,7 +721,15 @@
                     margin-top: 0.5em
                     white-space: pre-line
                 .access_block_grid
-                    +f.grid(repeat(2, 1fr), auto, 6rem, calc(1.7 * 1em))
+                    +f.flex(sta, bet)
+                    flex-wrap: wrap
+                    gap: calc(1.7 * 1em) 0
+                    > li:not(.--long)
+                        width: calc((100% - 6rem) * 0.5)
+                        flex-shrink: 0
+                    > li.--long
+                        width: 100%
+                        flex-shrink: 0
                 .--indent
                     position: relative
                     +f.flex(baseline, sta)
