@@ -356,6 +356,7 @@
                     position: absolute
                     bottom: 0
                     width: 100%
+                    white-space: pre-line
                 .facilityList_sticky_textRight_inner.--current
                     position: relative
             .facilityList_sticky_item.--current
@@ -451,7 +452,7 @@
                     height: 1100rem
                     +f.sp
                         width: 348rem
-                        height: 750rem
+                        height: 642rem
                 .showImg:nth-child(1)
                     width: 701rem
                     height: 467rem
@@ -710,12 +711,25 @@
                 margin-bottom: calc(1.7em * 3)
                 a
                     text-decoration: underline
+                .access_block_note
+                    +f.font(calc(13 * 0.8), 170, 6, R)
+                    margin-bottom: 1.7em
+                    display: inline-block
                 .access_block_content
                     padding-left: 1.5em
                     border-left: v.$border
                     margin-top: 0.5em
+                    white-space: pre-line
                 .access_block_grid
-                    +f.grid(repeat(2, 1fr), auto, 6rem, calc(1.7 * 1em))
+                    +f.flex(sta, bet)
+                    flex-wrap: wrap
+                    gap: calc(1.7 * 1em) 0
+                    > li:not(.--long)
+                        width: calc((100% - 6rem) * 0.5)
+                        flex-shrink: 0
+                    > li.--long
+                        width: 100%
+                        flex-shrink: 0
                 .--indent
                     position: relative
                     +f.flex(baseline, sta)

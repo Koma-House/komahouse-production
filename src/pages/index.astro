@@ -13,6 +13,26 @@ import Others from '../components/Others.astro';
 import Gallery from '../components/Gallery.astro';
 import Faq from '../components/Faq.astro';
 import src_1f from "../assets/top/map.png"
+import { microcms } from "../libs/microCMS"
+import type { FacilityType, FaqType, InformationType } from '../libs/microCMS';
+
+const facilities = await microcms.getAllContents<FacilityType>({
+    endpoint: "facility",
+    queries: {
+      orders: "-system:default",
+    },
+});
+
+const faqs = await microcms.getAllContents<FaqType>({
+    endpoint: "faq",
+    queries: {
+      orders: "-system:default",
+    },
+});
+
+const info = await microcms.getObject<InformationType>({
+  endpoint: "information",
+});
 ---
 
 <Layout>
@@ -52,7 +72,7 @@ import src_1f from "../assets/top/map.png"
 				</p>
 			</div>
 		</section>
-		<Facility />
+		<Facility data={facilities} />
 		<Others />
 		<section class="floor">
 			<div class="floor_texts">
@@ -90,17 +110,14 @@ import src_1f from "../assets/top/map.png"
 						</div>
 						<p class="access_block_content">
 							<Address /><br /><br />
-							<span class="--indent">
-								お車でお越しの方<br />
-								東京湾アクアライン経由、都心から約40分<br />
-								駐車場あり（無料）
-							</span><br /><br />
-							<span class="--indent">
-								電車・バスでお越しの方<br />
-								高速バス：東京・渋谷・品川 各駅 → 「木更津駅」約60分<br />
-								JR特急：東京駅 → 「木更津駅」約55分<br />
-								木更津駅から徒歩 約13分／タクシー 約5分
-							</span>
+							{info.access.map((item, index) => (
+								<>
+									<span class="--indent">
+										{item.title}<br />
+										{item.detail}
+									</span>{index !== info.access.length - 1 && <br />}
+								</>
+							))}
 						</p>
 					</div>
 					<div class="access_block">
@@ -129,69 +146,23 @@ import src_1f from "../assets/top/map.png"
 					</div>
 					<div class="access_block">
 						<SectionHeading main={"Facilities"} />
+						<p class="access_block_note">＊季節や仕入れ状況により変わることがあります。予めご了承ください。</p>
 						<div class="access_block_content --faci">
 							<ul class="access_block_grid">
-								<li class="--indent">
-									室内設備<br />
-									冷暖房<br />
-									Wi-Fi<br />
-									空気清浄機<br />
-									洗濯機<br />
-									ワークスペース<br />
-									トイレ × 2
-								</li>
-								<li class="--indent">
-									バス・洗面<br />
-									洗面台 × 2<br />
-									ドライヤー<br />
-									サウナ<br />
-									水風呂
-								</li>
-								<li class="--indent">
-									キッチン<br />
-									4口コンロ<br />
-									冷蔵庫<br />
-									炊飯器<br />
-									電子レンジ<br />
-									オーブントースター<br />
-									ケトル<br />
-									調理器具<br />
-									食器<br />
-									カトラリー<br />
-									子ども用食器<br />
-								</li>
-								<li class="--indent">
-									屋外設備<br />
-									BBQセット<br />
-									デッキチェア × 4<br />
-									デッキソファ × 1<br />
-									外気浴チェア × 2
-								</li>
-							</ul><br />
-							<p class="--indent">
-								<span>
-									寝具<br />
-									1F シングル × 4<br />
-									2F 各部屋 セミダブル × 2・シングル × 1
-								</span>
-							</p><br />
-							<p class="--indent">
-								<span>
-									アメニティ<br />
-									触れるものから、心地よく。<br />
-									使い心地だけでなく、<br />
-									ものづくりの背景にも共感できるものを選びました。<br />
-									nakedfact | Face & Body Soap<br />
-									ORMONICA | Shampoo & Conditioner<br />
-									YOBEK | Hand Wash<br />
-									<small>＊季節や仕入れ状況により変わることがあります。<br class="--sp" />予めご了承ください。</small>
-								</span>
-							</p>
+								{info.facilities.map((child) => (
+									<li class={child.isLong ? "--indent --long" : "--indent"}>
+										{child.title}<br />
+										{child.body.map((grandChild, index) => (
+											<>{grandChild.title}{index !== child.body.length - 1 && <br />}</>
+										))}
+									</li>
+								))}
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<Faq />
+		<Faq data={faqs} />
 	</article>
 </Layout>
